@@ -65,7 +65,7 @@ $(".list-group").on("blur", "textarea", function(){
 
   //get the parent ul's id attribute
   var status = $(this)
-    .localStorage(".list-group")
+    .closest(".list-group")
     .attr("id")
     .replace("list-", "");
   
@@ -85,6 +85,26 @@ $(".list-group").on("blur", "textarea", function(){
 
   //replace textarea with p element
   $(this).replaceWith(taskP);
+});
+
+//due date was clicked
+$(".list-group").on("click", "span", function(){
+  //get current text
+  var date = $(this)
+    .text()
+    .trim();
+
+  //create new input element
+  var dateInput = $("<input>")
+    .attr("type", "text")
+    .addClass("form-control")
+    .val(date);
+
+  //swap out elements
+  $(this).replaceWith(dateInput);
+
+  //automatically focus on new element
+  dateInput.trigger("focus");
 });
 
 // modal was triggered
